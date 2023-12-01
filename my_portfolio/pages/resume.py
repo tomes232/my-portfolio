@@ -17,6 +17,6 @@ def resume() -> rx.Component:
     #)
     return rx.image(
         src="/resume.png",
-        width="200%",
-        height="100%",
+        width="100%",
+        height="50%",
         )

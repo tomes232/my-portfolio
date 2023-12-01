@@ -15,11 +15,29 @@ def sidebar_header() -> rx.Component:
     return rx.hstack(
         # The logo.
         rx.image(
-            src="/icon.svg",
+            src="/my-logo.svg",
             height="2em",
         ),
         rx.spacer(),
-        # Link to Reflex GitHub repo.
+        # Link to my linkedin.
+        rx.link(
+            rx.center(
+                rx.image(
+                    src="/linkedin.svg",
+                    height="3em",
+                    padding="0.2em",
+                ),
+                box_shadow=styles.box_shadow,
+                bg="transparent",
+                border_radius=styles.border_radius,
+                _hover={
+                    "bg": styles.accent_color,
+                },
+            ),
+            href="https://www.linkedin.com/in/thomas-pickup-986778186",
+        ),
+
+        # Link to Tomes232 GitHub repo.
         rx.link(
             rx.center(
                 rx.image(
@@ -34,7 +52,7 @@ def sidebar_header() -> rx.Component:
                     "bg": styles.accent_color,
                 },
             ),
-            href="https://github.com/reflex-dev/reflex",
+            href="https://github.com/tomes232",
         ),
         width="100%",
         border_bottom=styles.border,
