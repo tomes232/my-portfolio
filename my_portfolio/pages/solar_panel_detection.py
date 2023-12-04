@@ -1,5 +1,7 @@
 """The Solar Panel Detection page."""
 from my_portfolio.templates import template
+from my_portfolio.components.spd_format import spd
+
 
 import reflex as rx
 
@@ -11,13 +13,4 @@ def solar_panel_detection() -> rx.Component:
     Returns:
         The UI for the spd page.
     """
-    return rx.vstack(
-        rx.heading("Solar Panel Detection", font_size="3em"),
-
-        rx.video(
-
-            url="https://youtu.be/dyFH9vZEw9s",
-            width="800px",
-            height="600px",
-        ),
-    )
+    return spd()

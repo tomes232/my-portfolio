@@ -2,7 +2,7 @@
 
 from my_portfolio import styles
 from my_portfolio.templates import template
-
+from my_portfolio.components.photo_change import photo_change
 import reflex as rx
 
 
@@ -13,6 +13,108 @@ def index() -> rx.Component:
     Returns:
         The UI for the home page.
     """
-    with open("README.md", encoding="utf-8") as readme:
+    with open("aboutme.md", encoding="utf-8") as readme:
         content = readme.read()
-    return rx.markdown(content, component_map=styles.markdown_style)
+
+    data = data = [
+    {
+        "language": "Python",
+        "A": 130,
+        "fullMark": 150,
+    },
+    {
+        "language": "C/C++",
+        "A": 100,
+        "fullMark": 150,
+    },
+    {
+        "language": "Java",
+        "A": 70,
+        "fullMark": 150,
+    },
+    {
+        "language": "Javascript",
+        "A":20,
+        "fullMark": 150,
+    },
+    {
+        "language": "SQL",
+        "A": 105,
+        "fullMark": 150,
+    },
+    {
+        "language": "HTML/CSS",
+        "A": 40,
+        "fullMark": 150,
+    },
+]
+    
+
+    return rx.vstack(
+                        rx.box(rx.center(rx.vstack(rx.heading("Welcome to My Portfolio", size="4xl", color="grey"),photo_change())), bg="lightgreen", padding="2em"),
+                        rx.markdown(content),
+                        rx.accordion(
+                                        items=[
+                                            ("My Info", rx.flex(
+                                                        rx.vstack(
+                                                        rx.box(
+                                                            rx.span("Name: ", font_weight="bold"),
+                                                            rx.span("Thomas Pickup"),
+                                                            text_align="left"
+                                                        ),
+                                                        rx.box(
+                                                            rx.span("Degree: ", font_weight="bold"),
+                                                            rx.span("BSE computer science"),
+                                                            text_align="left"
+                                
+                                                        ),
+                                                        rx.box(
+                                                            rx.span("Phone: ", font_weight="bold"),
+                                                            rx.span("+914 356 7228"),
+                                                            text_align="left"
+                                                        ),
+                                                        ),
+                                                        rx.spacer(),
+                                                            rx.vstack(
+                                                            rx.box(
+                                                                rx.span("Birthday: ", font_weight="bold"),
+                                                                rx.span("March 7th 2000"),
+                                                                text_align="left"
+                                                            ),
+                                                            rx.box(
+                                                                rx.span("Experience: ", font_weight="bold"),
+                                                                rx.span("2 Years"),
+                                                                text_align="left"
+                                                            ),
+                                                            rx.box(
+                                                                rx.span("Email: ", font_weight="bold"),
+                                                                rx.span("tomes232@gmail.com"),
+                                                                text_align="left"
+                                                            ),
+                                                        ),
+                                                )),
+
+                                                            
+                                            ("Skills", rx.vstack(
+                                                        rx.heading("Skills", size="lg", color="grey"),
+                                                                rx.box(
+                                                                    rx.recharts.radar_chart(
+                                                                    rx.recharts.radar(
+                                                                        data_key="A",
+                                                                        stroke="#8884d8",
+                                                                        fill="#8884d8",
+                                                                    ),
+                                                                    rx.recharts.polar_grid(),
+                                                                    rx.recharts.polar_angle_axis(data_key="language"),
+                                                                    data=data,
+                                                                ),
+                                                                    border_radius="lg",
+
+                                                                    )
+                                                                ))
+                                        ],
+                                        width="100%",
+                                    )
+    )
+
+
