@@ -4,6 +4,5 @@
 __pycache__/
 *.pub
 ssh_digital_ocean
-.*
 .venv
 *.Identifier
