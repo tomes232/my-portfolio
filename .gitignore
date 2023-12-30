@@ -1,8 +1,8 @@
+*.Identifier
 *.db
+*.pub
 *.py[cod]
+.venv
 .web
 __pycache__/
-*.pub
 ssh_digital_ocean
-.venv
-*.Identifier

@@ -2,6 +2,7 @@
 
 from my_portfolio import styles
 from my_portfolio.state import State, models
+from my_portfolio.components.loading_icon import loading_icon
 #from my_portfolio import styles
 
 import reflex as rx
@@ -37,21 +38,40 @@ def chat() -> rx.Component:
         ]
     )
 def action_bar() -> rx.Component:
-    return rx.hstack(
-        rx.input(
-            placeholder="Ask me about my resume",
-            on_change=State.set_question,
-            style=styles.input_style,),
-        rx.button(
-            "Ask",
-            on_click=State.answer, 
-            style=styles.button_style),
-    )
+    return rx.box(rx.vstack(rx.form(
+            rx.form_control(
+            rx.hstack(
+            rx.input(
+                placeholder="Ask me about my resume",
+                id="question",
+                _placeholder={"color": "#fffa"},
+                _hover={"border_color": styles.accent_color},
+                style=styles.input_style),
+                
+            rx.button(
+                rx.cond(
+                    State.processing,
+                    loading_icon(height="1em"),
+                    rx.text("Send"),
+                ),
+                    type_="submit",
+                    _hover={"bg": styles.accent_color},
+                    style=styles.input_style,
+                    color_scheme="facebook",
+                    ),
+            ),
+            is_disabled=State.processing,
+            ),
+            on_submit=State.answer,
+            reset_on_submit=True,
+            width="100%",
+
+            ),),)   
 
 def chatbox() -> rx.Component:
     return rx.container(
         #menu(),
-        rx.heading("Resume Chatbot", size=1, style=styles.heading_style),
+        rx.heading("Resume Chatbot"),
         chat(),
         action_bar(),
     )

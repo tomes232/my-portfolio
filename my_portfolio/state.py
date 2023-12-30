@@ -33,8 +33,14 @@ class State(rx.State):
 
     thread: str = None
 
-    def answer(self):
-        # Our chatbot is not very smart right now...
+    processing: bool = False
+
+    async def answer(self, form_data: dict[str, str]):
+
+        # Clear the input and start the processing.
+        self.question = form_data["question"]
+        self.processing = True
+        yield
 
         if self.question == "":
             answer = "Please ask a question."
@@ -68,6 +74,14 @@ class State(rx.State):
 
         self.chat_history.append((self.question, answer))
         self.question = ""
+
+        self.processing = False
+
+    
+        for field_id in form_data:
+            rx.set_value(field_id, "")
+        
+
 
 
     def change_spd_notebook(self):
