@@ -1,10 +1,21 @@
 """chatbox component for the app."""
 
 from my_portfolio import styles
-from my_portfolio.state import State
+from my_portfolio.state import State, models
 #from my_portfolio import styles
 
 import reflex as rx
+
+def menu() -> rx.Component:
+    return rx.vstack(
+        rx.heading(State.model),
+        rx.select(
+            models,
+            placeholder="Select a model",
+            on_change=State.set_option,
+            color_schemes="twitter",
+        ))
+
 
 def qa(question: str, answer: str) -> rx.Component:
     return rx.box(
@@ -39,6 +50,8 @@ def action_bar() -> rx.Component:
 
 def chatbox() -> rx.Component:
     return rx.container(
+        #menu(),
+        rx.heading("Resume Chatbot", size=1, style=styles.heading_style),
         chat(),
         action_bar(),
     )
