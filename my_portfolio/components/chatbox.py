@@ -41,25 +41,25 @@ def action_bar() -> rx.Component:
     return rx.box(rx.vstack(rx.form(
             rx.form_control(
             rx.hstack(
-            rx.input(
-                placeholder="Ask me about my resume",
-                id="question",
-                _placeholder={"color": "#fffa"},
-                _hover={"border_color": styles.accent_color},
-                style=styles.input_style),
-                
-            rx.button(
-                rx.cond(
-                    State.processing,
-                    loading_icon(height="1em"),
-                    rx.text("Send"),
-                ),
-                    type_="submit",
-                    _hover={"bg": styles.accent_color},
-                    style=styles.input_style,
-                    color_scheme="facebook",
+                rx.input(
+                    placeholder="Ask me about my resume",
+                    id="question",
+                    _placeholder={"color": "#fffa"},
+                    _hover={"border_color": styles.accent_color},
+                    style=styles.input_style),
+                    
+                rx.button(
+                    rx.cond(
+                        State.processing,
+                        loading_icon(height="1em"),
+                        rx.text("Send"),
                     ),
-            ),
+                        type_="submit",
+                        _hover={"bg": styles.accent_color},
+                        style=styles.input_style,
+                        color_scheme="facebook",
+                    ),
+                ),
             is_disabled=State.processing,
             ),
             on_submit=State.answer,
