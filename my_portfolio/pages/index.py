@@ -4,6 +4,7 @@ from my_portfolio import styles
 from my_portfolio.templates import template
 from my_portfolio.components.photo_change import photo_change
 import reflex as rx
+from my_portfolio.components.pdf_viewer import worker, viewer
 
 
 @template(route="/", title="Home", image="/github.svg")
@@ -111,7 +112,15 @@ def index() -> rx.Component:
                                                                     border_radius="lg",
 
                                                                     )
-                                                                ))
+                                                                )),
+                                            ("Resume", rx.box(
+                                                            rx.center(
+                                                                worker(viewer()),
+                                                            ),
+                                                            height="1100px",
+                                                            
+                                                        ),),
+                                                
                                         ],
                                         width="100%",
                                     )
