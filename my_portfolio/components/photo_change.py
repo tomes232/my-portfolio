@@ -9,10 +9,11 @@ def photo_change() -> rx.Component:
     print(State.photo)
     return rx.hstack(   rx.IconButton(aria_label="Change Photo", icon= rx.icon(tag="chevron_left"), on_click=State.change_photo_back),
         
-                        rx.image(src=State.photo,   width="400px",
+                        rx.image(src=State.photo,   
+                            width="400px",
                             height="auto",
                             border_radius="200px 200px",
-                            border="5px solid #555",
+                            border="1px solid #000000",
                             #box_shadow="lg",
                         ),
 

@@ -1,4 +1,4 @@
-# About Me
+## About Me
 
 Hello there! I'm a recent graduate from the University of Michigan, proudly holding a Bachelor's degree in Computer Science alongside a minor in Mathematics. My academic journey has been a thrilling exploration of the diverse applications of data within the realm of computer science.
 

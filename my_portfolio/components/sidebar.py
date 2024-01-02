@@ -15,8 +15,10 @@ def sidebar_header() -> rx.Component:
     return rx.hstack(
         # The logo.
         rx.image(
-            src="/my-logo.svg",
-            height="2em",
+            src="/pickup-logo.svg",
+            height="4em",
+            border_radius="4em 4em",
+
         ),
         rx.spacer(),
         # Link to my linkedin.

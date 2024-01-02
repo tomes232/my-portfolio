@@ -6,18 +6,14 @@ from my_portfolio.components.photo_change import photo_change
 import reflex as rx
 from my_portfolio.components.pdf_viewer import worker, viewer
 
-
-@template(route="/", title="Home", image="/github.svg")
-def index() -> rx.Component:
-    """The home page.
-
-    Returns:
-        The UI for the home page.
+def skills()-> rx.Component:
+    """skills section of info page
+    
+        Returns:
+          an rx.Component
     """
-    with open("aboutme.md", encoding="utf-8") as readme:
-        content = readme.read()
 
-    data = data = [
+    data = [
     {
         "language": "Python",
         "A": 130,
@@ -48,12 +44,45 @@ def index() -> rx.Component:
         "A": 40,
         "fullMark": 150,
     },
-]
+    ]
+
+    return rx.box(
+            rx.recharts.radar_chart(
+            rx.recharts.radar(
+                data_key="A",
+                stroke="#8884d8",
+                fill="#8884d8",
+            ),
+            rx.recharts.polar_grid(),
+            rx.recharts.polar_angle_axis(data_key="language"),
+            data=data,
+        ),
+            padding="2em",
+            )
+
+
+@template(route="/", title="Home", image="/github.svg")
+def index() -> rx.Component:
+    """The home page.
+
+    Returns:
+        The UI for the home page.
+    """
+
+    
+    with open("aboutme.md", encoding="utf-8") as readme:
+        content = readme.read()
+
+
     
 
     return rx.vstack(
-                        rx.box(rx.center(rx.vstack(rx.heading("Welcome to My Portfolio", size="4xl", color="grey"),photo_change())), bg="lightgreen", padding="2em"),
-                        rx.markdown(content),
+                        rx.box(rx.center(rx.vstack(rx.heading("Welcome to My Portfolio", size='xl'),photo_change()))),
+                        rx.divider(orientation="horizontal"),
+                        rx.spacer(),
+                        rx.spacer(),
+                        rx.markdown(content, component_map=styles.markdown_style),
+                        skills(),
                         rx.accordion(
                                         items=[
                                             ("My Info", rx.flex(
@@ -96,23 +125,7 @@ def index() -> rx.Component:
                                                 )),
 
                                                             
-                                            ("Skills", rx.vstack(
-                                                        rx.heading("Skills", size="lg", color="grey"),
-                                                                rx.box(
-                                                                    rx.recharts.radar_chart(
-                                                                    rx.recharts.radar(
-                                                                        data_key="A",
-                                                                        stroke="#8884d8",
-                                                                        fill="#8884d8",
-                                                                    ),
-                                                                    rx.recharts.polar_grid(),
-                                                                    rx.recharts.polar_angle_axis(data_key="language"),
-                                                                    data=data,
-                                                                ),
-                                                                    border_radius="lg",
-
-                                                                    )
-                                                                )),
+                                            ("Skills", skills()),
                                             ("Resume", rx.box(
                                                             rx.center(
                                                                 worker(viewer()),

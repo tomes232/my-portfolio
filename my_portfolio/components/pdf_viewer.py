@@ -1,10 +1,13 @@
 import reflex as rx
 
+from reflex.components.component import NoSSRComponent
+
 # class File(rx.Component):
 #     """A custom loading icon component."""
 #     library = './resume.pdf'
 #     tag = ""
 #     url: rx.Var[str] = "/resume.pdf"
+
 
 class PDFDoc(rx.Component):
     """A custom loading icon component."""
@@ -33,15 +36,19 @@ class PDFWorker(rx.Component):
 
 
 
-class PDFViewer(rx.Component):
+class PDFViewer(PDFWorker):
     """PDF Viewer Component."""
 
     library = "@react-pdf-viewer/core@3.12.0"
-    lib_dependencies: list[str] = ["@react-pdf-viewer/default-layout@3.12.0"]
+    plugins: list[str] = ["@react-pdf-viewer/default-layout@3.12.0"]
 
     tag = "Viewer"
 
     fileUrl: rx.Var[str] = "/resume.pdf"
+    
+    def _get_custom_code(self) -> str:
+        return"""import '@react-pdf-viewer/core/lib/styles/index.css';
+                import '@react-pdf-viewer/default-layout/lib/styles/index.css';"""
 
 worker = PDFWorker.create
 viewer = PDFViewer.create

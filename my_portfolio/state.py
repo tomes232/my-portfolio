@@ -12,9 +12,9 @@ import pprint
 
 models: List[str] = ["distilbert", "openai"]
 
-photo_list: List[str] = ["prof.png", "1.png", "2.png", "3.png", "4.png"]
+#photo_list: List[str] = ["prof.png", "1.png", "2.png", "3.png", "4.png"]
 
-
+photo_list: List[str] = ["https://i.ibb.co/6JPDBd9/prof.png", "https://i.ibb.co/yBjZLYG/2.png", "https://i.ibb.co/3YWHLXb/1.png", "https://i.ibb.co/pxkLL55/cooking.png", "https://i.ibb.co/JQFNJKv/4.png"]
 
 
 class State(rx.State):
